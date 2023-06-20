@@ -1,0 +1,4 @@
+AA Bb cc.
+^D
+AA bb cc.
+^D

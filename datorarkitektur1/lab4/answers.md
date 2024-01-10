@@ -5,9 +5,9 @@ Author: Yueyuan Huang, Shiqi Shu
 
 1. The hit rate is 0. This is because although each element is fetched into cache when it is accessed, the whole array cannot fit into the cache (the cache can fit exactly half of the array), which means the latter half will replace the former half, thus none of them could be found in the cache during the next loop.
 
-2. There are 128 compulsory misses because our cache has a size of 512 bytes and each block is 4 bytes, we need 128 fetches to fill the cache.
+2. There are 256 compulsory misses because the data have 256 words each fetch put a word into cache, we need 256 fetches to cache all of the data.
 
-3. If the cache size is unchanged and the block size is changed to 8 bytes, there would be 64 compulsory misses because each fetch now fills 8 bytes instead of 4.
+3. If the cache size is unchanged and the block size is changed to 8 bytes, there would be 128 compulsory misses because each fetch now fills 8 bytes instead of 4.
 
 4. Only changing from direct mapping to 2-ways set associative doesn't affect the hit rate here because as long as we cache a single element each time and our cache cannot hold the whole array, nothing could be reused in cache.
 

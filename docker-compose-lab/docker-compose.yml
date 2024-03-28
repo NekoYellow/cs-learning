@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name:  lab4-api
+    environment:
+      - PGUSER=admin
+      - PGPASSWORD=admin
+      - PGDATABASE=books
+      - PGHOST=lab4-db
+      - PGPORT=5432
+    ports:
+      - "5555:80"
+    networks:
+      - lab4-db-network
+  
+  db-admin:
+    image: adminer
+    container_name: lab4-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - lab4-adminer-network
+
+  lab4-db:
+    image: postgres
+    container_name: lab4-db
+    networks:
+      - lab4-db-network
+      - lab4-adminer-network
+    volumes:
+      - ./database/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - lab4-db-volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=books
+
+volumes:
+  lab4-db-volume:
+
+networks:
+  lab4-db-network:
+    driver: bridge
+  
+  lab4-adminer-network:
+    driver: bridge

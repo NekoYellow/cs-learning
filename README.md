@@ -1,1 +1,1 @@
-Repo for materials produced in learning
+Miscellaneous learning materials, e.g., homeworks, labs, notes, etc.
